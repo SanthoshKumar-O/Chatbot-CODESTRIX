@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "title": "Responsive Web Design Certification",
+    "description": "Learn the basics of HTML5 and CSS3 to build responsive, accessible web layouts. Covers flexbox, CSS grid, media queries, and semantic markup.",
+    "topic": "Web Dev",
+    "difficulty": "beginner",
+    "url": "https://www.freecodecamp.org/learn/2022/responsive-web-design/",
+    "source": "freeCodeCamp.org"
+  },
+  {
+    "id": 2,
+    "title": "The Odin Project - Foundations",
+    "description": "A comprehensive open-source curriculum for absolute beginners to learn full-stack web development. Covers Git, basic HTML, CSS, and basic JavaScript.",
+    "topic": "Web Dev",
+    "difficulty": "beginner",
+    "url": "https://www.theodinproject.com/paths/foundations",
+    "source": "The Odin Project"
+  },
+  {
+    "id": 3,
+    "title": "CS50: Introduction to Computer Science",
+    "description": "Harvard's legendary entry-level computer science course. Teaches critical thinking, algorithms, data structures, memory management using C, Python, SQL, and Web Development.",
+    "topic": "Algorithms",
+    "difficulty": "beginner",
+    "url": "https://www.youtube.com/playlist?list=PLhQjrBD2T382_R182ekgKsa1-L82g3V2O",
+    "source": "CS50 on YouTube"
+  },
+  {
+    "id": 4,
+    "title": "MDN JavaScript Guide",
+    "description": "The definitive resource for learning modern JavaScript (ES6+). Highly descriptive docs covering prototype-based OOP, async functions, promises, DOM API, and event loop.",
+    "topic": "Web Dev",
+    "difficulty": "intermediate",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+    "source": "MDN Web Docs"
+  },
+  {
+    "id": 5,
+    "title": "Scientific Computing with Python Certification",
+    "description": "Master basic Python logic, loops, file operations, algorithms, and build several utility calculators and code challenges.",
+    "topic": "Python",
+    "difficulty": "beginner",
+    "url": "https://www.freecodecamp.org/learn/scientific-computing-with-python/",
+    "source": "freeCodeCamp.org"
+  },
+  {
+    "id": 6,
+    "title": "Practical Deep Learning for Coders",
+    "description": "Jeremy Howard's world-famous fast.ai course teaching deep learning algorithms from a top-down, code-first perspective using PyTorch and fastai libraries.",
+    "topic": "ML/AI",
+    "difficulty": "advanced",
+    "url": "https://course.fast.ai/",
+    "source": "fast.ai"
+  },
+  {
+    "id": 7,
+    "title": "Python for Data Analysis - 3rd Edition",
+    "description": "Interactive notebook tutorials by Wes McKinney, creator of Pandas, covering data parsing, cleaning, plotting with matplotlib, numpy, and structuring clean pipelines.",
+    "topic": "Data Science",
+    "difficulty": "intermediate",
+    "url": "https://wesmckinney.com/book/",
+    "source": "Official Book & Code Site"
+  },
+  {
+    "id": 8,
+    "title": "Full Stack Open",
+    "description": "University of Helsinki's course teaching modern JavaScript-based web development. Covers React, Redux, Node.js, Express, MongoDB, GraphQL, TypeScript, and Docker.",
+    "topic": "Web Dev",
+    "difficulty": "advanced",
+    "url": "https://fullstackopen.com/en/",
+    "source": "University of Helsinki"
+  },
+  {
+    "id": 9,
+    "title": "Learn Git Branching",
+    "description": "An interactive, visual game teaching Git version control branch merging, rebasing, cherry-picking, and remote repository integration.",
+    "topic": "DevOps",
+    "difficulty": "beginner",
+    "url": "https://learngitbranching.js.org/",
+    "source": "Learn Git Branching"
+  },
+  {
+    "id": 10,
+    "title": "Kaggle Learn: Introduction to Machine Learning",
+    "description": "A rapid, practical introduction to framing ML goals, building Random Forest and Decision Tree models using scikit-learn, and validation strategies.",
+    "topic": "ML/AI",
+    "difficulty": "beginner",
+    "url": "https://www.kaggle.com/learn/intro-to-machine-learning",
+    "source": "Kaggle"
+  },
+  {
+    "id": 11,
+    "title": "FastAPI Official Tutorial",
+    "description": "Comprehensive guide to building production-grade asynchronous web APIs with Python. Teaches Pydantic validation, dependency injection, OAuth2 security, and auto docs.",
+    "topic": "Python",
+    "difficulty": "intermediate",
+    "url": "https://fastapi.tiangolo.com/tutorial/",
+    "source": "Official Documentation"
+  },
+  {
+    "id": 12,
+    "title": "NeetCode 150 - Roadmap",
+    "description": "Curated list of 150 LeetCode problems covering arrays, binary search, trees, graphs, backtracking, and dynamic programming with step-by-step video explanations.",
+    "topic": "Algorithms",
+    "difficulty": "advanced",
+    "url": "https://neetcode.io/roadmap",
+    "source": "NeetCode"
+  },
+  {
+    "id": 13,
+    "title": "Docker Curriculum",
+    "description": "A comprehensive, easy-to-follow guide for getting started with Docker containers, multi-container setups, Docker Compose, AWS Elastic Beanstalk deployment, and CI/CD.",
+    "topic": "DevOps",
+    "difficulty": "intermediate",
+    "url": "https://docker-curriculum.com/",
+    "source": "Docker Curriculum"
+  },
+  {
+    "id": 14,
+    "title": "SQLBolt: Learn SQL",
+    "description": "An interactive series of lessons and exercises designed to help you quickly learn and practice SQL queries in the browser. Covers SELECT, JOINs, and aggregates.",
+    "topic": "Databases",
+    "difficulty": "beginner",
+    "url": "https://sqlbolt.com/",
+    "source": "SQLBolt"
+  },
+  {
+    "id": 15,
+    "title": "PostgreSQL Tutorial for Beginners",
+    "description": "Deep dive into Postgres features, database creation, triggers, constraints, advanced indexing, optimization, window functions, and scaling strategies.",
+    "topic": "Databases",
+    "difficulty": "intermediate",
+    "url": "https://www.postgresqltutorial.com/",
+    "source": "PostgresQLExpert"
+  },
+  {
+    "id": 16,
+    "title": "Machine Learning Zoomcamp",
+    "description": "A free engineering-focused machine learning course by Alexey Grigorev. Covers regression, classification, evaluation metrics, deep learning, Kubernetes deployment, and MLOps.",
+    "topic": "ML/AI",
+    "difficulty": "intermediate",
+    "url": "https://github.com/alexeygrigorev/mlbookcamp-code/tree/master/course-zoomcamp",
+    "source": "DataTalksClub"
+  },
+  {
+    "id": 17,
+    "title": "React.dev - Modern Documentation",
+    "description": "The official React tutorial and documentation site rewritten with modern hooks-based patterns. Teaches state management, effects, custom hooks, and React performance.",
+    "topic": "Web Dev",
+    "difficulty": "intermediate",
+    "url": "https://react.dev/",
+    "source": "Meta / React Core Team"
+  },
+  {
+    "id": 18,
+    "title": "Kubernetes Web Academy",
+    "description": "Free, curated video tutorials explaining Kubernetes containers, pod orchestration, architecture, networking, service mesh, ingress controllers, and Helm charts.",
+    "topic": "DevOps",
+    "difficulty": "advanced",
+    "url": "https://kube.academy/",
+    "source": "VMware KubeAcademy"
+  },
+  {
+    "id": 19,
+    "title": "Data Structures & Algorithms in Python",
+    "description": "Free interactive interactive visual textbook teaching stacks, queues, linked lists, hash tables, search algorithms, sorting algorithms, and complexity analysis.",
+    "topic": "Algorithms",
+    "difficulty": "intermediate",
+    "url": "https://runestone.academy/ns/books/published/pythonds3/index.html",
+    "source": "Runestone Academy"
+  },
+  {
+    "id": 20,
+    "title": "AWS Cloud Practitioner Essentials",
+    "description": "Official free foundational AWS course covering cloud concepts, core AWS security services, global infrastructure, compute, networking, and billing details.",
+    "topic": "Cloud",
+    "difficulty": "beginner",
+    "url": "https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials",
+    "source": "Amazon Web Services"
+  }
+]
