@@ -12,7 +12,7 @@ def generate_response(prompt):
         messages=[
             {
                 "role":"user",
-                "content":"prompt"
+                "content":prompt
             }
         ]
     )

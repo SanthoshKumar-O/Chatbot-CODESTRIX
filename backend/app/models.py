@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, Text, ForeignKey, DateTime
+from sqlalchemy import Column, String, Text, ForeignKey, DateTime, Integer, Float
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -33,3 +33,31 @@ class Message(Base):
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
 
     session = relationship("Session", back_populates="messages")
+
+class QuizAttempt(Base):
+
+    __tablename__ = "quiz_attempts"
+
+    id = Column(
+        UUID(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+        index=True
+    )
+
+    user_id = Column(
+        UUID(as_uuid=True),
+        ForeignKey("users.id", ondelete="CASCADE")
+    )
+    topic = Column(String, nullable=False)
+    difficulty = Column(String, nullable=False)
+    score = Column(Integer, nullable=False)
+    total_questions = Column(Integer, nullable=False)
+    accuracy = Column(Float, nullable=False)
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )
+    user = relationship("User")
+
+    

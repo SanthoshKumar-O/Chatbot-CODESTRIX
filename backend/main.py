@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .app.database import engine, Base
 from .app.routers import auth, sessions, chat
-
+from .app.routers import quiz
 # Create database tables directly on startup for robustness
 Base.metadata.create_all(bind=engine)
 
@@ -25,7 +25,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(sessions.router)
 app.include_router(chat.router)
-
+app.include_router(quiz.router)
 @app.get("/api/health")
 def health_check():
     return {"status": "healthy", "service": "learning-recommender-api"}
