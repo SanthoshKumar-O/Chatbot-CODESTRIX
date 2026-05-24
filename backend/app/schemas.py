@@ -54,3 +54,18 @@ class SessionResponse(SessionBase):
 class ChatRequest(BaseModel):
     session_id: UUID
     message: str
+
+class QuizAttemptCreate(BaseModel):
+    topic: str
+    difficulty: str
+    score: int
+    total_questions: int
+    accuracy: float
+
+class QuizAttemptResponse(QuizAttemptCreate):
+    id: UUID
+    user_id: UUID
+    created_at: datetime
+    class Config:
+        from_attributes = True
+

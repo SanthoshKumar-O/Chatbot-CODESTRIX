@@ -1,4 +1,4 @@
-def prompt(query,context):
+def build_prompt(query,context):
     prompt=f"""
     You are an intelligent learning assistant.
     Answer the query based on the provided context.
