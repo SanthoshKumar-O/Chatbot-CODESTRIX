@@ -1,7 +1,7 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import PyPDFLoader
-from app.models.embedding import Embed_function
+from RagBot.app.models.embedding import Embed_function
 
 
 loader=PyPDFLoader("app/data/sample.pdf")

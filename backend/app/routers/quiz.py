@@ -1,9 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from fastapi import Depends
+
 from ..database import get_db
 from ..models import QuizAttempt
 from ..schemas import QuizAttemptCreate
+from .auth import get_current_user
+from .. import models
 
 router = APIRouter(
     prefix="/quiz",
@@ -11,10 +13,14 @@ router = APIRouter(
 )
 
 @router.post("/save")
+def save_quiz_attempt(
+    quiz: QuizAttemptCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user)
+):
 
-def save_quiz_attempt(quiz: QuizAttemptCreate,db: Session = Depends(get_db)):
     attempt = QuizAttempt(
-        user_id="PUT_USER_ID_LATER",
+        user_id=current_user.id,
         topic=quiz.topic,
         difficulty=quiz.difficulty,
         score=quiz.score,
@@ -23,12 +29,10 @@ def save_quiz_attempt(quiz: QuizAttemptCreate,db: Session = Depends(get_db)):
     )
 
     db.add(attempt)
-
     db.commit()
-
     db.refresh(attempt)
 
     return {
-        "message":"Quiz attempt saved",
-        "quiz_id":attempt.id
+        "message": "Quiz attempt saved",
+        "quiz_id": attempt.id
     }

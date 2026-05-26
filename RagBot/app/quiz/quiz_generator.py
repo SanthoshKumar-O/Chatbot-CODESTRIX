@@ -1,5 +1,5 @@
 import json
-from app.rag.generator import generate_response
+from RagBot.app.rag.generator import generate_response
 
 def build_quiz_prompt(topic, difficulty):
 

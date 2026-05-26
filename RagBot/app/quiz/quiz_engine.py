@@ -1,4 +1,4 @@
-from app.quiz.quiz_generator import generate_quiz
+from RagBot.app.quiz.quiz_generator import generate_quiz
 
 def start_quiz(topic, difficulty):
 

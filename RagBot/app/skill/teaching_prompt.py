@@ -1,4 +1,4 @@
-def build_teaching_prompt(topic, difficulty):
+def build_teaching_prompt(topic, difficulty, history, user_query):
 
     if difficulty == "beginner":
 
@@ -30,15 +30,28 @@ def build_teaching_prompt(topic, difficulty):
 """
 
     prompt = f"""
-Teach the topic: {topic}
+You are an AI programming mentor.
 
-Student skill level:
+Previous Conversation:
+{history}
+
+Current User Question:
+{user_query}
+
+Topic:
+{topic}
+
+Student Skill Level:
 {difficulty}
 
-Teaching instructions:
+Teaching Style Instructions:
 {style}
 
-Make the explanation engaging and structured.
+Rules:
+- Continue naturally from previous conversation if relevant
+- Do not restart the topic unnecessarily
+- Adapt explanation to student skill level
+- Keep response engaging and educational
 """
 
     return prompt
