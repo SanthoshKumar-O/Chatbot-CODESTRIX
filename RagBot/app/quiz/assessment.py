@@ -1,4 +1,4 @@
-from app.quiz.quiz_engine import start_quiz
+from RagBot.app.quiz.quiz_engine import start_quiz
 
 def assess_skill(topic):
 

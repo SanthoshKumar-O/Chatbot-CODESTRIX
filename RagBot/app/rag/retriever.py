@@ -1,5 +1,5 @@
 from langchain_chroma import Chroma
-from app.models.embedding import Embed_function
+from RagBot.app.models.embedding import Embed_function
 
 db=Chroma(persist_directory="app/db/chroma",embedding_function=Embed_function())
 

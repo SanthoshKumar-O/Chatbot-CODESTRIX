@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .app.database import engine, Base
-from .app.routers import auth, sessions, chat
-from .app.routers import quiz
-# Create database tables directly on startup for robustness
+
+from backend.app.database import engine, Base
+from backend.app.routers import auth, sessions, chat, quiz
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -12,24 +12,35 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS configurations
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, restrict to Vercel/frontend domains
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include Routers
+
 app.include_router(auth.router)
 app.include_router(sessions.router)
 app.include_router(chat.router)
 app.include_router(quiz.router)
+
 @app.get("/api/health")
 def health_check():
-    return {"status": "healthy", "service": "learning-recommender-api"}
+    return {
+        "status": "healthy",
+        "service": "learning-recommender-api"
+    }
 
+# Run Server
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True
+    )
