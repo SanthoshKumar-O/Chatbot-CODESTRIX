@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from uuid import UUID
 from datetime import datetime, timezone
-
+from backend.app.models import UserProfile
 from .. import models, schemas
 from ..database import get_db
 from .auth import get_current_user
@@ -22,6 +22,7 @@ def get_sessions(db: Session = Depends(get_db), current_user: models.User = Depe
 def create_session(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
     title = f"Chat {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}"
     new_session = models.Session(user_id=current_user.id, title=title)
+    UserProfile.total_sessions += 1
     db.add(new_session)
     db.commit()
     db.refresh(new_session)

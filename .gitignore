@@ -32,3 +32,6 @@ chroma.sqlite3
 # OS metadata
 .DS_Store
 Thumbs.db
+
+node_modules/
+dist/

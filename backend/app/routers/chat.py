@@ -32,7 +32,8 @@ async def chat_stream(
     response = mentor_agent(
         payload.message,
         db,
-        payload.session_id
+        payload.session_id,
+        current_user.id
     )
 
     return {

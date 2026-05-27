@@ -1,32 +1,51 @@
-def build_teaching_prompt(topic, difficulty, history, user_query):
+def build_teaching_prompt(topic, skill_label, history, user_query):
 
-    if difficulty == "beginner":
+    if skill_label == "Newbie":
 
         style = """
-- Explain using simple words
-- Use beginner-friendly analogies
-- Avoid heavy jargon
-- Teach step-by-step
-- Include basic examples
+- Teach like the student is completely new
+- Use tiny examples
+- Explain every term
+- Avoid assumptions
+- Use friendly analogies
+-Don't use advanced technical terms if you use explain them as well
+- Go step by step
 """
 
-    elif difficulty == "intermediate":
+    elif skill_label == "Beginner":
 
         style = """
-- Explain concepts clearly
-- Include practical coding examples
-- Explain logic and workflow
-- Introduce moderate technical terms
+- Use beginner-friendly explanations
+- Introduce coding terminology slowly
+- Include simple practical examples
+- Reinforce fundamentals
+-Ensure concepts are clear before moving on
 """
 
-    else:
+    elif skill_label == "Intermediate":
 
         style = """
-- Teach in depth
+- Focus on logic building
+- Include coding workflow explanations
+- Use moderate technical depth
+- Encourage problem solving
+"""
+    elif skill_label == "Advanced Intermediate":
+
+        style = """
 - Include optimization techniques
-- Explain internal working
-- Include edge cases
-- Discuss complexity analysis
+- Discuss edge cases
+- Explain internal behavior
+- Encourage scalable thinking
+"""
+
+    else:  # Advanced
+        style = """
+- Teach deeply and technically
+- Include complexity analysis
+- Discuss architecture decisions
+- Explain tradeoffs and optimizations
+- Focus on professional-level understanding
 """
 
     prompt = f"""
@@ -42,7 +61,7 @@ Topic:
 {topic}
 
 Student Skill Level:
-{difficulty}
+{skill_label}
 
 Teaching Style Instructions:
 {style}
