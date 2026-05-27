@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.app.database import engine, Base
-from backend.app.routers import auth, sessions, chat, quiz
+from backend.app.routers import auth, sessions, chat, quiz,clustering
 
 Base.metadata.create_all(bind=engine)
 
@@ -26,6 +26,7 @@ app.include_router(auth.router)
 app.include_router(sessions.router)
 app.include_router(chat.router)
 app.include_router(quiz.router)
+app.include_router(clustering.router)
 
 @app.get("/api/health")
 def health_check():

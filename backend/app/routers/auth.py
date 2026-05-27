@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from jose import JWTError, jwt
-
+from RagBot.app.cluster.cluster_skill import run_clustering
 from .. import models, schemas, auth_utils
 from ..database import get_db
 
@@ -44,6 +44,11 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+    profile = models.UserProfile(
+    user_id=new_user.id)   
+    db.add(profile)
+    db.commit()
+    run_clustering(db)
     
     access_token_expires = timedelta(minutes=auth_utils.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = auth_utils.create_access_token(
