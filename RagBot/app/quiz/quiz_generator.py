@@ -75,6 +75,9 @@ def generate_quiz(
     difficulty,
     previous_questions=None
 ):
+    if not topic:
+        topic = "general programming"
+
     prompt = build_quiz_prompt(
         topic,
         difficulty,

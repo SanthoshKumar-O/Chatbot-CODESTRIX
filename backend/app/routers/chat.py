@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from uuid import UUID
 
 from .. import models, schemas
 from ..database import get_db
@@ -24,10 +25,14 @@ async def chat_stream(
     ).first()
 
     if not session:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Session not found"
+        session = models.Session(
+            id=payload.session_id,
+            user_id=current_user.id,
+            title="Guest Chat"
         )
+        db.add(session)
+        db.commit()
+        db.refresh(session)
 
     response = mentor_agent(
         payload.message,

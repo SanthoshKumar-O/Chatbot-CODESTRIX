@@ -32,6 +32,8 @@ def mentor_agent(
 
     analysis = classify_intent(user_query)
 
+    analysis = analysis or {}
+
     intent = analysis.get(
         "intent",
         "teach"
@@ -89,9 +91,8 @@ def mentor_agent(
 
     skill_label = "Newbie"
 
-    if profile and profile.skill_label:
-
-        skill_label = profile.skill_label
+    if profile:
+        skill_label = getattr(profile, "skill_label", None) or getattr(profile, "learning_behavior", None) or "Newbie"
 
     
     # LOAD CHAT HISTORY

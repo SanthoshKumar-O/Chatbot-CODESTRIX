@@ -1,8 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from the repository root .env early so routers
+# and RagBot modules that read env on import see the keys.
+ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_ENV = os.path.join(ROOT_DIR, ".env")
+load_dotenv(PROJECT_ENV)
 
 from backend.app.database import engine, Base
-from backend.app.routers import auth, sessions, chat, quiz,clustering
+from backend.app.routers import auth, sessions, chat, quiz, clustering, documents
 
 Base.metadata.create_all(bind=engine)
 
@@ -27,6 +35,7 @@ app.include_router(sessions.router)
 app.include_router(chat.router)
 app.include_router(quiz.router)
 app.include_router(clustering.router)
+app.include_router(documents.router)
 
 @app.get("/api/health")
 def health_check():

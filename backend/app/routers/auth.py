@@ -12,9 +12,30 @@ router = APIRouter(
     tags=["auth"],
 )
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login", auto_error=False)
+
+
+def ensure_guest_user(db: Session):
+    guest_email = "guest@codestrix.local"
+    guest = db.query(models.User).filter(models.User.email == guest_email).first()
+    if guest:
+        return guest
+
+    hashed_password = "guest"
+    guest = models.User(email=guest_email, hashed_password=hashed_password)
+    db.add(guest)
+    db.commit()
+    db.refresh(guest)
+
+    profile = models.UserProfile(user_id=guest.id)
+    db.add(profile)
+    db.commit()
+    return guest
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    if not token:
+        return ensure_guest_user(db)
+
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -27,10 +48,10 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
             raise credentials_exception
         token_data = schemas.TokenData(email=email)
     except JWTError:
-        raise credentials_exception
+        return ensure_guest_user(db)
     user = db.query(models.User).filter(models.User.email == token_data.email).first()
     if user is None:
-        raise credentials_exception
+        return ensure_guest_user(db)
     return user
 
 @router.post("/register", response_model=schemas.Token)
