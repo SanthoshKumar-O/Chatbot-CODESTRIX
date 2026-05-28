@@ -5,7 +5,7 @@ const HomePage = () => (
   <div className="page home-page">
     <section className="hero-panel">
       <div className="hero-copy">
-        <span className="eyebrow">RAG chatbot workspace</span>
+        <span className="eyebrow">RAG learning workspace</span>
         <h1>Learn faster with chat, documents, and quizzes in one place.</h1>
         <p>
           CODESTRIX turns study material into a responsive learning assistant with source-aware answers,
@@ -19,7 +19,7 @@ const HomePage = () => (
       <div className="hero-preview">
         <div className="preview-card top">Searching documents...</div>
         <div className="preview-card center">Ranking chunks...</div>
-        <div className="preview-card bottom">Generating answer with citations</div>
+        <div className="preview-card bottom">Generating source-backed response</div>
       </div>
     </section>
 

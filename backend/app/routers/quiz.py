@@ -8,7 +8,7 @@ from .auth import get_current_user
 from .. import models
 
 router = APIRouter(
-    prefix="/quiz",
+    prefix="/api/quiz",
     tags=["Quiz"]
 )
 

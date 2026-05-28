@@ -42,5 +42,14 @@ async def chat_stream(
     )
 
     return {
-        "response": response
-    }
+    "response": response,
+    "sources": [
+        "rag_context_chunk_1",
+        "rag_context_chunk_2"
+    ],
+    "thinking": [
+        "Retrieving relevant chunks",
+        "Ranking semantic matches",
+        "Generating final response"
+    ]
+}

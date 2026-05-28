@@ -5,8 +5,32 @@ import HomePage from './pages/HomePage'
 import ChatPage from './pages/ChatPage'
 import UploadPage from './pages/UploadPage'
 import QuizPage from './pages/QuizPage'
-
+import { useEffect } from 'react'
+import { createSession } from './services/sessionService'
+import { useChatStore } from './store/chatStore'
 export default function App() {
+  const sessionId = useChatStore((s) => s.sessionId)
+  const setSessionId = useChatStore((s) => s.setSessionId)
+  useEffect(() => {
+  const initSession = async () => {
+    if (sessionId) return
+
+    try {
+      const session = await createSession()
+
+      if (session?.id) {
+        setSessionId(session.id)
+      }
+    } catch (error) {
+      console.error(
+        'Failed to create session:',
+        error
+      )
+    }
+  }
+
+  initSession()
+}, [sessionId, setSessionId])
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="container">
