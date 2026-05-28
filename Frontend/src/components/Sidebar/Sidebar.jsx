@@ -3,11 +3,15 @@ import { NavLink } from 'react-router-dom'
 import { useChatStore } from '../../store/chatStore'
 import { useDocStore } from '../../store/docStore'
 import { useQuizStore } from '../../store/quizStore'
+import { useAuthStore } from '../../store/authStore'
 
 const Sidebar = () => {
   const chatCount = useChatStore((s) => s.messages.length)
   const docsCount = useDocStore((s) => s.documents.length)
   const quizReady = useQuizStore((s) => Boolean(s.quiz))
+  const authenticated = useAuthStore((s) => s.authenticated)
+  const userEmail = useAuthStore((s) => s.userEmail)
+  const clearAuth = useAuthStore((s) => s.clearAuth)
 
   return (
     <aside className="sidebar">
@@ -34,6 +38,18 @@ const Sidebar = () => {
         <NavLink to="/upload">Documents</NavLink>
         <NavLink to="/quiz">Quiz</NavLink>
       </nav>
+
+      <div className="sidebar-card auth-status-card">
+        <span className="sidebar-label">Access</span>
+        <p className="auth-status-text">
+          {authenticated ? `Signed in as ${userEmail || 'user'}` : 'Not signed in'}
+        </p>
+        {authenticated ? (
+          <button type="button" className="sidebar-logout" onClick={clearAuth}>
+            Log Out
+          </button>
+        ) : null}
+      </div>
 
       <div className="sidebar-card note">
         <span className="sidebar-label">Tip</span>
