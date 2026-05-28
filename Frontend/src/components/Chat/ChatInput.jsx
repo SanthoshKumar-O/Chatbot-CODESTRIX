@@ -8,7 +8,7 @@ const ChatInput = () => {
   const loading = useChatStore((s) => s.loading)
 
   const submit = async () => {
-    if (!text.trim()) return
+    if (!text.trim() || loading) return
     await send(text)
     setText('')
   }

@@ -5,19 +5,32 @@ import HomePage from './pages/HomePage'
 import ChatPage from './pages/ChatPage'
 import UploadPage from './pages/UploadPage'
 import QuizPage from './pages/QuizPage'
-import { useAuthStore } from './store/authStore'
+import { useEffect } from 'react'
+import { createSession } from './services/sessionService'
+import { useChatStore } from './store/chatStore'
+export default function App() {
+  const sessionId = useChatStore((s) => s.sessionId)
+  const setSessionId = useChatStore((s) => s.setSessionId)
+  useEffect(() => {
+  const initSession = async () => {
+    if (sessionId) return
 
-const ProtectedRoute = ({ children }) => {
-  const authenticated = useAuthStore((s) => s.authenticated)
+    try {
+      const session = await createSession()
 
-  if (!authenticated) {
-    return <Navigate to="/" replace state={{ authRequired: true }} />
+      if (session?.id) {
+        setSessionId(session.id)
+      }
+    } catch (error) {
+      console.error(
+        'Failed to create session:',
+        error
+      )
+    }
   }
 
-  return children
-}
-
-export default function App() {
+  initSession()
+}, [sessionId, setSessionId])
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="container">

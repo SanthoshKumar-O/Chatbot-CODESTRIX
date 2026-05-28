@@ -10,7 +10,7 @@ const QuizPage = () => (
       <ul>
         <li>Multiple-choice questions</li>
         <li>Quiz history</li>
-        <li>Demo fallback when the backend is offline</li>
+        <li>Source-aware quiz generation</li>
       </ul>
     </div>
     <QuizBlock />

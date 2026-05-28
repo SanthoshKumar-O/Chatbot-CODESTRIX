@@ -11,7 +11,11 @@ const ChatPage = () => {
             <div className="mini-card">
               <span className="eyebrow">Live flow</span>
               <h3>Thinking state, sources, and direct replies</h3>
-              <p>The UI is now structured for source-backed chat responses and can fall back to demo mode if the backend is offline or not authenticated.</p>
+              <p>
+  Ask questions, retrieve relevant document chunks,
+  and receive source-backed answers from your
+  knowledge base.
+</p>
             </div>
           </div>
         </div>

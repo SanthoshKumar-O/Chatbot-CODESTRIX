@@ -9,7 +9,7 @@ const MessageBubble = ({ message }) => {
     <div className={`message-bubble ${isUser ? 'user' : 'assistant'}`}>
       <div className="message-badge">{isUser ? 'You' : 'AI'}</div>
       <div className="message-card">
-        <div className="message-text">{message.text || message.content || ''}</div>
+        <div className="message-text">{message.text || ''}</div>
         {!isUser && message.thinking?.length > 0 && (
           <div className="thinking-lines">
             {message.thinking.map((step) => (
@@ -26,9 +26,6 @@ const MessageBubble = ({ message }) => {
               ))}
             </ul>
           </div>
-        )}
-        {!isUser && message.mode === 'demo' && (
-          <div className="demo-chip">Demo mode response</div>
         )}
       </div>
     </div>

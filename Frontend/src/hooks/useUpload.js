@@ -1,26 +1,46 @@
 import { useCallback } from 'react'
-import { uploadDocument, listDocuments } from '../services/docService'
+import {
+  uploadDocument,
+  listDocuments,
+} from '../services/docService'
+
 import { useDocStore } from '../store/docStore'
 
 export const useUpload = () => {
-  const setUploading = useDocStore((s) => s.setUploading)
-  const setDocuments = useDocStore((s) => s.setDocuments)
-  const addDocument = useDocStore((s) => s.addDocument)
+  const setUploading = useDocStore(
+    (s) => s.setUploading
+  )
 
-  const upload = useCallback(async (file) => {
-    setUploading(true)
-    try {
-      const res = await uploadDocument(file)
-      const docs = await listDocuments()
-      setDocuments(docs)
-      if (res?.id) {
-        addDocument(res)
+  const setDocuments = useDocStore(
+    (s) => s.setDocuments
+  )
+
+  const upload = useCallback(
+    async (file) => {
+      setUploading(true)
+
+      try {
+        const res = await uploadDocument(file)
+
+        const docs =
+          await listDocuments()
+
+        setDocuments(docs)
+
+        return res
+      } catch (error) {
+        console.error(
+          'Upload failed:',
+          error
+        )
+
+        throw error
+      } finally {
+        setUploading(false)
       }
-      return res
-    } finally {
-      setUploading(false)
-    }
-  }, [setUploading, setDocuments, addDocument])
+    },
+    [setUploading, setDocuments]
+  )
 
   return { upload }
 }

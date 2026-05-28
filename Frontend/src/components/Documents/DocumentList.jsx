@@ -9,8 +9,12 @@ const DocumentList = () => {
 
   useEffect(() => {
     const load = async () => {
-      const docs = await listDocuments()
-      setDocuments(docs)
+      try {
+    const docs = await listDocuments()
+    setDocuments(docs)
+  } catch (error) {
+    console.error("Failed to load docs:", error)
+  }
     }
     load()
   }, [setDocuments])
