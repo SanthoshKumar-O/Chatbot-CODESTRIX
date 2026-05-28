@@ -1,10 +1,21 @@
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import Sidebar from './components/Sidebar/Sidebar'
 import HomePage from './pages/HomePage'
 import ChatPage from './pages/ChatPage'
 import UploadPage from './pages/UploadPage'
 import QuizPage from './pages/QuizPage'
+import { useAuthStore } from './store/authStore'
+
+const ProtectedRoute = ({ children }) => {
+  const authenticated = useAuthStore((s) => s.authenticated)
+
+  if (!authenticated) {
+    return <Navigate to="/" replace state={{ authRequired: true }} />
+  }
+
+  return children
+}
 
 export default function App() {
   return (
@@ -17,9 +28,30 @@ export default function App() {
         <main className="main">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/chat" element={<ChatPage />} />
-            <Route path="/upload" element={<UploadPage />} />
-            <Route path="/quiz" element={<QuizPage />} />
+            <Route
+              path="/chat"
+              element={(
+                <ProtectedRoute>
+                  <ChatPage />
+                </ProtectedRoute>
+              )}
+            />
+            <Route
+              path="/upload"
+              element={(
+                <ProtectedRoute>
+                  <UploadPage />
+                </ProtectedRoute>
+              )}
+            />
+            <Route
+              path="/quiz"
+              element={(
+                <ProtectedRoute>
+                  <QuizPage />
+                </ProtectedRoute>
+              )}
+            />
           </Routes>
         </main>
       </div>

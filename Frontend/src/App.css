@@ -336,6 +336,120 @@ a {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
+.dashboard-auth-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 20px;
+  padding: 24px;
+}
+
+.auth-copy h3 {
+  margin: 10px 0 0;
+  font-size: 1.25rem;
+}
+
+.auth-notice {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  color: #fcd34d;
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.auth-form,
+.auth-success {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.auth-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.auth-tab {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.auth-tab.active {
+  color: var(--text);
+  background: rgba(124, 231, 255, 0.12);
+  border-color: rgba(124, 231, 255, 0.38);
+}
+
+.auth-form {
+  display: grid;
+  gap: 12px;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.auth-form input {
+  width: 100%;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+}
+
+.auth-error {
+  margin: 0;
+  color: #fda4af;
+}
+
+.auth-submit,
+.sidebar-logout {
+  border: none;
+  border-radius: 14px;
+  padding: 11px 14px;
+  cursor: pointer;
+  color: #031018;
+  background: linear-gradient(135deg, var(--brand), var(--brand-strong));
+  box-shadow: 0 12px 24px rgba(73, 167, 255, 0.2);
+}
+
+.auth-submit:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.auth-success h4 {
+  margin: 10px 0 0;
+  font-size: 1.2rem;
+}
+
+.auth-success p,
+.auth-status-text {
+  color: var(--muted);
+}
+
+.auth-status-card {
+  display: grid;
+  gap: 10px;
+}
+
+.auth-status-text {
+  margin: 4px 0 0;
+  line-height: 1.4;
+}
+
 .glass-panel,
 .quiz-block,
 .upload-box {
@@ -472,7 +586,8 @@ a {
 
 .chat-input textarea:focus,
 .upload-box input:focus,
-.quiz-controls input:focus {
+.quiz-controls input:focus,
+.auth-form input:focus {
   border-color: rgba(124, 231, 255, 0.48);
   box-shadow: 0 0 0 4px rgba(124, 231, 255, 0.08);
 }
@@ -637,7 +752,8 @@ a {
 
   .hero-panel,
   .split-layout,
-  .feature-grid {
+  .feature-grid,
+  .dashboard-auth-panel {
     grid-template-columns: 1fr;
   }
 
