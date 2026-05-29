@@ -41,7 +41,15 @@ async def chat_stream(
         current_user.id
     )
 
+    if isinstance(response, dict):
+
+        return {
+        "type": "quiz",
+        "quiz": response
+    }
+
     return {
+    "type": "chat",
     "response": response,
     "sources": [
         "rag_context_chunk_1",

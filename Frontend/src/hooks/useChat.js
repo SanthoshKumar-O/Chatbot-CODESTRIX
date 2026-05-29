@@ -24,13 +24,26 @@ export const useChat = () => {
           sessionId
         )
 
-        addMessage({
-          role: 'assistant',
-          text: data.response || '',
-          sources: data.sources || [],
-          thinking: data.thinking || [],
-          mode: 'backend',
-        })
+        if (data.type === 'quiz') {
+
+  addMessage({
+    role: 'assistant',
+    text: 'Quiz generated successfully!',
+    quiz: data.quiz,
+    mode: 'quiz',
+  })
+
+} else {
+
+  addMessage({
+    role: 'assistant',
+    text: data.response || '',
+    sources: data.sources || [],
+    thinking: data.thinking || [],
+    mode: 'backend',
+  })
+
+}
       } catch (error) {
         console.error(
           'Chat request failed:',

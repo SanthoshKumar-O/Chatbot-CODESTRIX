@@ -2,17 +2,26 @@ import { api } from "./api";
 
 export const sendMessage = async (message, sessionId) => {
   try {
-    const res = await api.post("/chat", {
+    const res = await api.post("/chat/stream", {
       message,
       session_id: sessionId,
     });
 
+    if (res.data.type === "quiz") {
+
     return {
-      response: res.data.response,
-      sources: res.data.sources || [],
-      thinking: res.data.thinking || [],
-      mode: "backend",
+      type: "quiz",
+      quiz: res.data.quiz,
     };
+    }
+
+return {
+  type: "chat",
+  response: res.data.response,
+  sources: res.data.sources || [],
+  thinking: res.data.thinking || [],
+  mode: "backend",
+};
   } catch (error) {
     console.error("Chat API Error:", error);
 
