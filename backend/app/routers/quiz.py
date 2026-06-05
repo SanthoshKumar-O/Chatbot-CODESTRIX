@@ -10,7 +10,7 @@ from .. import models
 from .auth import get_current_user
 
 from RagBot.app.quiz.quiz_generator import generate_quiz
-
+from RagBot.app.quiz.quiz_engine import submit_quiz
 
 router = APIRouter(
     prefix="/api/quiz",
@@ -54,10 +54,14 @@ def generate_quiz_route(
 
         answer = question_data.get("answer")
 
-        correct_index = 0
+        answer_map = {
+                    "A": 0,
+                    "B": 1,
+                    "C": 2,
+                    "D": 3
+                }
 
-        if answer in options:
-            correct_index = options.index(answer)
+        correct_index = answer_map.get(answer, 0)
 
         formatted_questions.append({
 
@@ -90,3 +94,25 @@ def generate_quiz_route(
 
         "questions": formatted_questions
     }
+
+class QuizSubmitRequest(BaseModel):
+    topic: str
+    difficulty: str
+    answers: list[str]
+    questions: list
+
+@router.post("/submit")
+def submit_quiz_route(
+    payload: QuizSubmitRequest,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user)
+):
+
+    return submit_quiz(
+    topic=payload.topic,
+    difficulty=payload.difficulty,
+    answers=payload.answers,
+    questions=payload.questions,
+    db=db,
+    user_id=current_user.id
+)

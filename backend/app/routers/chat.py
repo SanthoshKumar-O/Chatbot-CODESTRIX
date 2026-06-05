@@ -41,23 +41,24 @@ async def chat_stream(
         current_user.id
     )
 
-    if isinstance(response, dict):
-
+    # Quiz response
+    if isinstance(response, dict) and "questions" in response:
         return {
-        "type": "quiz",
-        "quiz": response
-    }
+            "type": "quiz",
+            "quiz": response
+        }
 
+    # Normal chat response
     return {
-    "type": "chat",
-    "response": response,
-    "sources": [
-        "rag_context_chunk_1",
-        "rag_context_chunk_2"
-    ],
-    "thinking": [
-        "Retrieving relevant chunks",
-        "Ranking semantic matches",
-        "Generating final response"
-    ]
-}
+        "type": "chat",
+        "response": response,
+        "sources": [
+            "rag_context_chunk_1",
+            "rag_context_chunk_2"
+        ],
+        "thinking": [
+            "Retrieving relevant chunks",
+            "Ranking semantic matches",
+            "Generating final response"
+        ]
+    }

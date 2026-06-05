@@ -1,69 +1,100 @@
-import { useCallback } from 'react'
-import { sendMessage } from '../services/chatService'
-import { useChatStore } from '../store/chatStore'
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { sendMessage } from "../services/chatService";
+import { useChatStore } from "../store/chatStore";
+import { useQuizStore } from "../store/quizStore";
 
 export const useChat = () => {
-  const addMessage = useChatStore((s) => s.addMessage)
-  const setLoading = useChatStore((s) => s.setLoading)
-  const sessionId = useChatStore((s) => s.sessionId)
-
+  const addMessage = useChatStore(
+    (s) => s.addMessage
+  );
+  const setLoading = useChatStore(
+    (s) => s.setLoading
+  );
+  const sessionId = useChatStore(
+    (s) => s.sessionId
+  );
+  const setQuiz = useQuizStore(
+    (s) => s.setQuiz
+  );
+  const navigate = useNavigate();
   const send = useCallback(
     async (text) => {
-      if (!text.trim()) return
 
-      setLoading(true)
+      if (!text.trim()) return;
+
+      setLoading(true);
 
       addMessage({
-        role: 'user',
+        role: "user",
         text,
-      })
+      });
 
       try {
-        const data = await sendMessage(
-          text,
-          sessionId
-        )
 
-        if (data.type === 'quiz') {
+        const data =
+          await sendMessage(
+            text,
+            sessionId
+          );
 
-  addMessage({
-    role: 'assistant',
-    text: 'Quiz generated successfully!',
-    quiz: data.quiz,
-    mode: 'quiz',
-  })
+        console.log(
+          "CHAT RESPONSE:",
+          data
+        );
 
-} else {
+        if (
+          data.type === "quiz"
+        ) {
 
-  addMessage({
-    role: 'assistant',
-    text: data.response || '',
-    sources: data.sources || [],
-    thinking: data.thinking || [],
-    mode: 'backend',
-  })
+          setQuiz(data.quiz);
 
-}
-      } catch (error) {
-        console.error(
-          'Chat request failed:',
-          error
-        )
+          navigate("/quiz");
+
+          return;
+        }
 
         addMessage({
-          role: 'assistant',
+          role: "assistant",
           text:
-            'Failed to connect to backend.',
-          sources: [],
-          thinking: [],
-          mode: 'error',
-        })
+            data.response || "",
+          sources:
+            data.sources || [],
+          thinking:
+            data.thinking || [],
+          mode: "backend",
+        });
+
+      } catch (error) {
+
+        console.error(
+          "Chat request failed:",
+          error
+        );
+
+        addMessage({
+          role: "assistant",
+          text:
+            "Failed to connect to backend.",
+          mode: "error",
+        });
+
       } finally {
-        setLoading(false)
+
+        setLoading(false);
+
       }
     },
-    [addMessage, setLoading, sessionId]
-  )
 
-  return { send }
-}
+    [
+      addMessage,
+      setLoading,
+      sessionId,
+      setQuiz,
+      navigate,
+    ]
+  );
+
+  return { send };
+};
